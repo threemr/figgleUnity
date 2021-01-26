@@ -1,15 +1,16 @@
 ```
-$$$$$$$$\ $$\                     $$\                  $$$$$$\                           $$\   $$\           $$\   $$\               
-$$  _____|\__|                    $$ |                $$  __$$\                          $$ |  $$ |          \__|  $$ |              
-$$ |      $$\  $$$$$$\   $$$$$$\  $$ | $$$$$$\        $$ /  \__|$$$$$$\   $$$$$$\        $$ |  $$ |$$$$$$$\  $$\ $$$$$$\   $$\   $$\ 
-$$$$$\    $$ |$$  __$$\ $$  __$$\ $$ |$$  __$$\       $$$$\    $$  __$$\ $$  __$$\       $$ |  $$ |$$  __$$\ $$ |\_$$  _|  $$ |  $$ |
-$$  __|   $$ |$$ /  $$ |$$ /  $$ |$$ |$$$$$$$$ |      $$  _|   $$ /  $$ |$$ |  \__|      $$ |  $$ |$$ |  $$ |$$ |  $$ |    $$ |  $$ |
-$$ |      $$ |$$ |  $$ |$$ |  $$ |$$ |$$   ____|      $$ |     $$ |  $$ |$$ |            $$ |  $$ |$$ |  $$ |$$ |  $$ |$$\ $$ |  $$ |
-$$ |      $$ |\$$$$$$$ |\$$$$$$$ |$$ |\$$$$$$$\       $$ |     \$$$$$$  |$$ |            \$$$$$$  |$$ |  $$ |$$ |  \$$$$  |\$$$$$$$ |
-\__|      \__| \____$$ | \____$$ |\__| \_______|      \__|      \______/ \__|             \______/ \__|  \__|\__|   \____/  \____$$ |
-              $$\   $$ |$$\   $$ |                                                                                         $$\   $$ |
-              \$$$$$$  |\$$$$$$  |                                                                                         \$$$$$$  |
-               \______/  \______/                                                                                           \______/ 
+$$$$$$$$\$$\                  $$\                 $$$$$$\                         $$\   $$\         $$\  $$\              
+$$  _____\__|                 $$ |               $$  __$$\                        $$ |  $$ |        \__| $$ |             
+$$ |     $$\ $$$$$$\  $$$$$$\ $$ |$$$$$$\        $$ /  \__$$$$$$\  $$$$$$\        $$ |  $$ $$$$$$$\ $$\$$$$$$\  $$\   $$\ 
+$$$$$\   $$ $$  __$$\$$  __$$\$$ $$  __$$\       $$$$\   $$  __$$\$$  __$$\       $$ |  $$ $$  __$$\$$ \_$$  _| $$ |  $$ |
+$$  __|  $$ $$ /  $$ $$ /  $$ $$ $$$$$$$$ |      $$  _|  $$ /  $$ $$ |  \__|      $$ |  $$ $$ |  $$ $$ | $$ |   $$ |  $$ |
+$$ |     $$ $$ |  $$ $$ |  $$ $$ $$   ____|      $$ |    $$ |  $$ $$ |            $$ |  $$ $$ |  $$ $$ | $$ |$$\$$ |  $$ |
+$$ |     $$ \$$$$$$$ \$$$$$$$ $$ \$$$$$$$\       $$ |    \$$$$$$  $$ |            \$$$$$$  $$ |  $$ $$ | \$$$$  \$$$$$$$ |
+\__|     \__|\____$$ |\____$$ \__|\_______|      \__|     \______/\__|             \______/\__|  \__\__|  \____/ \____$$ |
+            $$\   $$ $$\   $$ |                                                                                 $$\   $$ |
+            \$$$$$$  \$$$$$$  |                                                                                 \$$$$$$  |
+             \______/ \______/                                                                                   \______/ 
+                                                                                                                          
 ```
 _(Using font: "Big Money-nw")_
 
@@ -52,7 +53,7 @@ Unity does not work too well with NuGet packages, because it regenerates the Pac
 This fork reformatted a few aspects (mostly stylistic) in the library to a version that Unity accepted, which generally meant to re-write a few lines with "an older style" of C#. 
 * The only expected "potentially unsafe" change was the removal of [`Nullable<T>`](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2012/2cf62fcy(v=vs.110)) checks on optional parameters (e.g. `myFunction(MyType? optParam = null)`. Note the question mark `?` after the name of the type.).
 
-* A couple of [local static methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions) had to be promoted into a higher scope within the class. Unity complained about the use of `static`, which is likely because [it requires C# 8.0 and later](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions#local-function-syntax). Without analyzing the code too deeply, we didn't feel it was a good idea to remove the `static` designation, but moving the methods to make them regular `private static` methods in the class didn't seem to cause undesirable effects.
+* A couple of [local static methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions) had to be promoted into a higher scope within the class. Unity complained about the use of `static`, which is likely because [it requires C# 8.0 and later](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions#local-function-syntax). Without analyzing the code too deeply, we didn't think it was a good idea to remove the `static` designation, but moving the methods to make them regular `private static` methods in the class didn't seem to cause undesirable effects.
 
 * The use of the [`using statement`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement) to handle the font database (a zip file). The original code uses a C# 8 flavor which eliminates the need of code blocks and braces to delimit the scope of that `using` statement. This was replaced with the older style with braces.
 

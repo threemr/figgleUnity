@@ -41,7 +41,7 @@ namespace Figgle
         /// <returns>The font described by the stream.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> is <c>null</c>.</exception>
         /// <exception cref="FiggleException">The stream contained an error and could not be parsed.</exception>
-        public static FiggleFont Parse(Stream stream, StringPool? pool = null)
+        public static FiggleFont Parse(Stream stream, StringPool pool = null)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
@@ -165,21 +165,7 @@ namespace Figgle
 
                 return new FiggleCharacter(lines);
 
-                static byte CountSolSpaces(string s)
-                {
-                    byte count = 0;
-                    for (; count < s.Length && s[count] == ' '; count++)
-                    {}
-                    return count;
-                }
 
-                static byte CountEolSpaces(string s)
-                {
-                    byte count = 0;
-                    for (var i = s.Length - 1; i > 0 && s[i] == ' '; i--, count++)
-                    {}
-                    return count;
-                }
             }
 
             var requiredCharacters = new FiggleCharacter[256];
@@ -220,5 +206,22 @@ readLine:
 
             return new FiggleFont(requiredCharacters, sparseCharacters, hardBlank, height, baseline, direction, layoutNew);
         }
+
+        static byte CountSolSpaces(string s)
+        {
+          byte count = 0;
+          for (; count < s.Length && s[count] == ' '; count++)
+          { }
+          return count;
+        }
+
+        static byte CountEolSpaces(string s)
+        {
+          byte count = 0;
+          for (var i = s.Length - 1; i > 0 && s[i] == ' '; i--, count++)
+          { }
+          return count;
+        }
+
     }
 }

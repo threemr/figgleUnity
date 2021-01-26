@@ -123,7 +123,7 @@ namespace Figgle
 
             var outputLines = Enumerable.Range(0, Height).Select(_ => new StringBuilder()).ToList();
 
-            FiggleCharacter? lastCh = null;
+            FiggleCharacter lastCh = null;
 
             foreach (var c in message)
             {
@@ -186,7 +186,7 @@ namespace Figgle
 
             return res.ToString();
 
-            int CalculateFitMove(FiggleCharacter? l, FiggleCharacter r)
+            int CalculateFitMove(FiggleCharacter l, FiggleCharacter r)
             {
                 if (smush == SM_FULLWIDTH)
                     return 0;

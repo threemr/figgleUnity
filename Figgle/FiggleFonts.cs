@@ -1,8 +1,10 @@
 ﻿// Copyright Drew Noakes. Licensed under the Apache-2.0 license. See the LICENSE file for more details.
 
 using System.Collections.Concurrent;
+using System.IO;
 using System.IO.Compression;
 using System.Reflection;
+using UnityEngine;
 
 namespace Figgle
 {
@@ -294,17 +296,24 @@ namespace Figgle
 
         private static FiggleFont FontFactory(string name)
         {
-            using var stream = typeof(FiggleFonts).GetTypeInfo().Assembly.GetManifestResourceStream("Figgle.Fonts.zip");
-            using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
-         
-            var entry = zip.GetEntry(name + ".flf");
+          //using (var stream = typeof(FiggleFonts).GetTypeInfo().Assembly.GetManifestResourceStream("Figgle.Fonts.zip"))
+          using (FileStream stream = new FileStream(Path.Combine(Application.streamingAssetsPath, @"Fonts.zip"), FileMode.Open))
+          {
+            using (var zip = new ZipArchive(stream, ZipArchiveMode.Read))
+            {
+              var entry = zip.GetEntry(name + ".flf");
 
-            if (entry == null)
+              if (entry == null)
                 throw new FiggleException($"No embedded font exists with name \"{name}\".");
 
-            using var entryStream = entry.Open();
-                
-            return FiggleFontParser.Parse(entryStream, _stringPool);
+              using (var entryStream = entry.Open())
+              {
+                return FiggleFontParser.Parse(entryStream, _stringPool);
+
+              }
+            }
+
+          }
         }
     }
 }
