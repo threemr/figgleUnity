@@ -106,7 +106,7 @@ Complete build size    1065.5 mb
 ```
 * As a compromise for the Unity console, note you can also [use some rich text](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html). You can see that on the example above. This renders colored, bigger text within the console (for the same purposes of visual separation). 
 
-* Other uses. As long as you make sure you **use a monospaced font**, the results from Figgle will look alright anywhere else in your application.
+* Other uses. As long as you make sure you **`use a monospaced font`**, the results from Figgle will look alright anywhere else in your application.
 
 
 ## Other examples
